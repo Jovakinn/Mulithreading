@@ -1,5 +1,6 @@
 package com.jovakinn.service;
 
+import com.jovakinn.AppRunner;
 import com.jovakinn.core.NewThread;
 
 import java.io.*;
@@ -50,7 +51,7 @@ public class FileManagerService {
         FileManagerService.writeBytes(toFile, bytes);
     }
 
-    public static void writeObject(String fileName, NewThread newThread){
+    public static void writeObject(String fileName, Thread newThread){
         try (FileOutputStream fileOutputStream = new FileOutputStream(FILES_DIR + fileName);
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)){
 
