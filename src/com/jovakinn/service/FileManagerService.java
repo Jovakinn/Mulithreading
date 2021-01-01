@@ -4,7 +4,7 @@ import com.jovakinn.core.NewThread;
 import java.io.*;
 import java.nio.file.Files;
 
-public class FileManagerService implements Serializable {
+public class FileManagerService extends Thread implements Serializable {
 
     private static final String MAIN_DIR = System.getProperty("user.dir");
     private static final String SEP = System.getProperty("file.separator");
@@ -49,17 +49,18 @@ public class FileManagerService implements Serializable {
         FileManagerService.writeBytes(toFile, bytes);
     }
 
-    public static void writeObject(String fileName, Thread newThread){
-        try (FileOutputStream fileOutputStream = new FileOutputStream(FILES_DIR + fileName);
-             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)){
+    // works without threads...
 
-            objectOutputStream.writeObject(newThread);
-            objectOutputStream.flush();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
+//    public static void writeObject(String fileName, Object newThread) throws NotSerializableException {
+//        try (FileOutputStream fileOutputStream = new FileOutputStream(FILES_DIR + fileName);
+//            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)){
+//
+//            objectOutputStream.writeObject(newThread);
+//            objectOutputStream.flush();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public static NewThread readObjectBytes (String fileName){
         try (FileInputStream fileInputStream = new FileInputStream(FILES_DIR + fileName);

@@ -2,6 +2,7 @@ package com.jovakinn;
 
 import com.jovakinn.core.NewThread;
 import com.jovakinn.service.FileManagerService;
+import java.io.ObjectStreamException;
 import java.util.logging.Logger;
 
 public class AppRunner implements Runnable {
@@ -18,6 +19,7 @@ public class AppRunner implements Runnable {
                 LOGGER.info("I am " + Thread.currentThread().getName() + ", nice to meet you over there!");
                 LOGGER.info("I have " + Thread.currentThread().getPriority() + " priority level.");
                 LOGGER.info("I have " + Thread.currentThread().getId() + " id.");
+                LOGGER.info("Am I a daemon? That's " + Thread.currentThread().isDaemon() + ".");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -32,12 +34,17 @@ public class AppRunner implements Runnable {
             thread = new Thread(new NewThread());
             thread.start();
         }
-        //TODO fix exception
-        fileManagerService.writeObject("threads.txt", thread);
-    }
 
+//        try {
+//            writeObject("threads.txt", thread);
+//        } catch (ObjectStreamException e) {
+//            e.printStackTrace();
+//        }
+//    }
+    }
     @Override
     public void run() {
+
     }
 }
 
