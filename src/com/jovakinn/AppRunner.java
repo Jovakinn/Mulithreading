@@ -2,10 +2,28 @@ package com.jovakinn;
 
 import com.jovakinn.core.NewThread;
 import com.jovakinn.service.FileManagerService;
+import java.util.logging.Logger;
 
-public class AppRunner {
+public class AppRunner implements Runnable {
 
-    public static void main(String[] args) {
+    private static final Logger LOGGER = Logger.getLogger(AppRunner.class.getName());
+    public static void main(String[] args)  {
+
+        Thread maxThread1 = new Thread();
+        Thread maxThread2 = new Thread();
+        Thread maxThread3 = new Thread();
+
+            try {
+                maxThread1.sleep(1000);
+                LOGGER.info("I am " + Thread.currentThread().getName() + ", nice to meet you over there!");
+                LOGGER.info("I have " + Thread.currentThread().getPriority() + " priority level.");
+                LOGGER.info("I have " + Thread.currentThread().getId() + " id.");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        maxThread1.start();
+        maxThread2.start();
+        maxThread3.start();
 
         FileManagerService fileManagerService = new FileManagerService();
 
@@ -14,6 +32,12 @@ public class AppRunner {
             thread = new Thread(new NewThread());
             thread.start();
         }
+        //TODO fix exception
         fileManagerService.writeObject("threads.txt", thread);
     }
+
+    @Override
+    public void run() {
+    }
 }
+

@@ -1,12 +1,10 @@
 package com.jovakinn.service;
 
-import com.jovakinn.AppRunner;
 import com.jovakinn.core.NewThread;
-
 import java.io.*;
 import java.nio.file.Files;
 
-public class FileManagerService {
+public class FileManagerService implements Serializable {
 
     private static final String MAIN_DIR = System.getProperty("user.dir");
     private static final String SEP = System.getProperty("file.separator");
