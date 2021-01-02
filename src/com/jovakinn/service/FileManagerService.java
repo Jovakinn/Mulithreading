@@ -49,18 +49,16 @@ public class FileManagerService extends Thread implements Serializable {
         FileManagerService.writeBytes(toFile, bytes);
     }
 
-    // works without threads...
+    public static void writeObject(String fileName, Object newThread) throws NotSerializableException {
+        try (FileOutputStream fileOutputStream = new FileOutputStream(FILES_DIR + fileName);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)){
 
-//    public static void writeObject(String fileName, Object newThread) throws NotSerializableException {
-//        try (FileOutputStream fileOutputStream = new FileOutputStream(FILES_DIR + fileName);
-//            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)){
-//
-//            objectOutputStream.writeObject(newThread);
-//            objectOutputStream.flush();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
+            objectOutputStream.writeObject(newThread);
+            objectOutputStream.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public static NewThread readObjectBytes (String fileName){
         try (FileInputStream fileInputStream = new FileInputStream(FILES_DIR + fileName);
