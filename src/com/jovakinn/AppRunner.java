@@ -4,9 +4,13 @@ import com.jovakinn.core.NewThread;
 import com.jovakinn.service.FileManagerService;
 import com.jovakinn.service.WorkerThreads;
 import java.io.ObjectStreamException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 public class AppRunner implements Runnable {
 
@@ -55,6 +59,18 @@ public class AppRunner implements Runnable {
         } catch (ObjectStreamException e) {
             LOGGER.info("We cannot serialize Thread.");
         }
+
+        List<String> list = new ArrayList<>();
+        list.add("1");
+        list.add("2");
+        list.add("3");
+
+        list.removeIf(value -> value.equals("2"));
+        list.forEach(System.out::println);
+
+        Stream<String> stream = list.stream();
+        stream.filter(element -> element.startsWith("1"));
+
     }
 
    @Override
